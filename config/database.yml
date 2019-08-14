@@ -23,7 +23,7 @@ default: &default
 
 development:
   <<: *default
-  database: lending_reviews_api_development
+  database: lending_reviews_api_dev
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
