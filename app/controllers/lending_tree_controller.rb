@@ -1,9 +1,9 @@
-require 'nokogiri'
-require 'open-uri'
-
 class LendingTreeController < ApplicationController
     def fetch_reviews
+        lending_tree_parser = LendingTreeParser.new(params[:url])
+        reviews = lending_tree_parser.page_iterator
         binding.pry
-        doc2 = Nokogiri::HTML(open(params[:url]))
+
+        render json: {reviews: reviews}, status: status
     end
 end
