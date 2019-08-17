@@ -38,7 +38,7 @@ class LendingTreeParser
             # if !url_hash[links[index].attributes["href"].content]
             #     url_hash[links[index].attributes["href"].content] = true
             puts "page_num: #{page_num}"
-                @thread_array << Thread.new {html_doc_iterator("#{@url}#{@query_string}#{page_num}")}
+            html_doc_iterator("#{@url}#{@query_string}#{page_num}")
             # end
 
             break if !@lender_nav_present 

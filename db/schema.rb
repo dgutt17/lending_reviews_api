@@ -10,10 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_14_151011) do
+ActiveRecord::Schema.define(version: 2019_08_17_192650) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "authors", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "business_urls", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "url"
+  end
 
   create_table "businesses", force: :cascade do |t|
     t.string "name"
@@ -33,8 +45,11 @@ ActiveRecord::Schema.define(version: 2019_08_14_151011) do
     t.boolean "would_recommend_lender"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "business_id", null: false
-    t.index ["business_id"], name: "index_reviews_on_business_id"
+    t.integer "business_url_id"
+    t.date "review_date"
+    t.integer "author_id"
+    t.index ["author_id"], name: "index_reviews_on_author_id"
+    t.index ["business_url_id"], name: "index_reviews_on_business_url_id"
   end
 
 end
