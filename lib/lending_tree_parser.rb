@@ -19,7 +19,6 @@ class LendingTreeParser
         # lender_nav = reviews.css(".lenderNav.pagination")
         # links = lender_nav.css(".page-link")
         url_hash = {}
-        
         while true do
             puts "top of loop"
             # if index == links.count - 1
