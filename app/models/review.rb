@@ -11,5 +11,5 @@ class Review < ApplicationRecord
                 :author => {:only => [:name]},
               }
         )
-      end
+    end
 end

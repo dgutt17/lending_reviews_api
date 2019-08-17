@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_17_192650) do
+ActiveRecord::Schema.define(version: 2019_08_17_210800) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 2019_08_17_192650) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "location"
   end
 
   create_table "business_urls", force: :cascade do |t|
@@ -46,7 +47,7 @@ ActiveRecord::Schema.define(version: 2019_08_17_192650) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "business_url_id"
-    t.date "review_date"
+    t.string "review_date"
     t.integer "author_id"
     t.index ["author_id"], name: "index_reviews_on_author_id"
     t.index ["business_url_id"], name: "index_reviews_on_business_url_id"
