@@ -45,13 +45,12 @@ RSpec.describe Review, type: :model do
             review_json = review.to_json
             review_key_array = JSON.parse(review_json).keys
 
-            expect(review_key_array.length == 5)
-            expect(review_key_array.include?("title"))
-            expect(review_key_array.include?("content"))
-            expect(review_key_array.include?("total_rating"))
-            expect(review_key_array.include?("review_date"))
-            expect(review_key_array.include?("author"))
-
+            expect(review_key_array.length).to eq 5
+            expect(review_key_array[0]).to eq "title"
+            expect(review_key_array[1]).to eq "content"
+            expect(review_key_array[2]).to eq "total_rating"
+            expect(review_key_array[3]).to eq "review_date"
+            expect(review_key_array[4]).to eq "author"
         end
     end
 

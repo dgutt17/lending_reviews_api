@@ -3,8 +3,7 @@ class Author < ApplicationRecord
 
     def self.find_or_create(author)
         author_arr = author.split("from")
-        db_author = Author.find_by_name(author_arr[0])
-
+        db_author = Author.find_by_name(author_arr[0].strip)
         if !db_author
             db_author = Author.new(name: author_arr[0].strip, location: author_arr[1].strip)
 
