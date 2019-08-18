@@ -1,6 +1,8 @@
 class Author < ApplicationRecord
     has_many :reviews
 
+    validates :name, presence: true
+    
     def self.find_or_create(author)
         author_arr = author.split("from")
         db_author = Author.find_by_name(author_arr[0].strip)

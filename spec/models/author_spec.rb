@@ -8,6 +8,19 @@ RSpec.describe Author, type: :model do
     end
   end
 
+  context "Validations" do 
+    let(:author) {create(:author)}
+
+    it "creates a valid author" do
+      expect(author).to be_valid
+    end
+
+    it "is not valid when there is no name" do 
+      author.name = nil
+      expect(author).not_to be_valid
+    end
+  end
+
   context "Class Methods" do 
     let(:author) {create(:author)}
 
