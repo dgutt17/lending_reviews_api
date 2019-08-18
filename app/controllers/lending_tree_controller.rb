@@ -6,9 +6,9 @@ class LendingTreeController < ApplicationController
         if !!@business_url
             reviews = @business_url.reviews
         else
-            lending_tree_parser = LendingTreeParser.new(@url)
+            lending_tree_parser = LendingTreeParser.new(params[:url])
             reviews = lending_tree_parser.page_iterator
-            LendingTreeJob.perform_async(reviews, @url)
+            LendingTreeJob.perform_async(reviews, params[:url])
         end
 
         render json: {reviews: reviews}, status: status
