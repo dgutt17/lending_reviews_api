@@ -39,4 +39,20 @@ RSpec.describe Review, type: :model do
         end
     end
 
+    context "Instance Methods" do 
+        let(:review) {create(:review)}
+        it "formats properly when it converts to json" do
+            review_json = review.to_json
+            review_key_array = JSON.parse(review_json).keys
+
+            expect(review_key_array.length == 5)
+            expect(review_key_array.include?("title"))
+            expect(review_key_array.include?("content"))
+            expect(review_key_array.include?("total_rating"))
+            expect(review_key_array.include?("review_date"))
+            expect(review_key_array.include?("author"))
+
+        end
+    end
+
 end
