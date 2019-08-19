@@ -7,13 +7,13 @@
 <space><space>Initially, I tried to find API endpoints to make http requests to receive json for all the reviews for a given url. However, LendingTree does not have a publicly available API. So I started to search the chrome dev tools for possible API endpoints with data. There is actually an API endpoint that you get json for specific Lenders: https://www.lendingtree.com/content/mu-plugins/lt-review-api/review-api-proxy.php?RequestType=&productType=&brandId=27085&requestmode=reviews,stats,ratingconfig,propertyconfig&page=0&sortby=reviewsubmitted&sortorder=desc&pagesize=10&AuthorLocation=All&_t=1566185572884. So perhaps in the second iteration of this project I would use this API endpoint instead of webscrapping. The one issue with this endpoint is that you need the brandId, which is not readily available. So you could make http requests to this endpoint until you store all the brandIds in your DB. Then match lenders to their brandId and make a request to this endpoint.
 
 ## The API Specifications<br />
-    <space>1. Request Type: POST<br />
-    <space>2. URI: http://localhost:3000/lending_tree/fetch_reviews<br />
-    <space>3. Parameters in the body of the request<br />
-        <space><space>a. url<br />
-            <space><space><space>1. string<br />
-            <space><space><space>2. REQUIREMENT: the url must start with https://www.lendingtree.com/reviews/ otherwise you will get an error message with a status of 400<br />
-            <space><space><space>3. If the part of url after https://www.lendingtree.com/reviews/ is incorrect, you will recieve an error message with a status of 404<br />
+    1. Request Type: POST
+    2. URI: http://localhost:3000/lending_tree/fetch_reviews
+    3. Parameters in the body of the request
+        a. url
+            1. string
+            2. REQUIREMENT: the url must start with https://www.lendingtree.com/reviews/ otherwise you will get an error message with a status of 400
+            3. If the part of url after https://www.lendingtree.com/reviews/ is incorrect, you will recieve an error message with a status of 404
     
 ## Example Request<br />
 {<br /><space>
