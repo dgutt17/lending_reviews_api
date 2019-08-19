@@ -8,13 +8,15 @@ class LendingTreeParser
         @url = url
         @stored_reviews = []
         @query_string = "?sort=cmV2aWV3c3VibWl0dGVkX2Rlc2M=&pid="
+        @no_doc_count = 0
     end
 
     def page_iterator
         page_num = 1
         while true do
+            puts "url: #{@url}#{@query_string}#{page_num}"
             doc = fetching_html_doc("#{@url}#{@query_string}#{page_num}")
-            break if !lender_nav_present?(doc)
+            break if !lender_nav_present?(doc) && @no_doc_count >= 10
             reviews = get_reviews(doc)
             html_doc_iterator(reviews)
 
@@ -34,6 +36,7 @@ class LendingTreeParser
 
     def lender_nav_present?(doc)
         lender_nav_present = doc.css(".lenderNav.pagination").present?
+        @no_doc_count += 1 if !lender_nav_present
 
         lender_nav_present
     end
@@ -41,14 +44,11 @@ class LendingTreeParser
     def get_reviews(doc)
         lender_reviews = doc.css(".lenderReviews")
         main_reviews = lender_reviews.css(".mainReviews")
+
+        main_reviews
     end
 
     def html_doc_iterator(reviews)
-        # puts "url: #{url}"
-        # doc = Nokogiri::HTML(open(url))
-        # @lender_nav_present = doc.css(".lenderNav.pagination").present?
-        # return if !@lender_nav_present
-        # reviews = doc.css(".lenderReviews")
         reviews.each do |elem|
             hash = {}
             hash["star_rating"] = elem.css(".numRec")[0].content[1]
@@ -59,8 +59,4 @@ class LendingTreeParser
             @stored_reviews << hash
         end
     end
-
-
-
-
 end

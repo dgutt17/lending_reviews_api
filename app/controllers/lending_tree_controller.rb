@@ -3,6 +3,7 @@ class LendingTreeController < ApplicationController
     before_action :load_business_url
 
     def fetch_reviews
+
         if !!@business_url
             reviews = @business_url.reviews
         else
