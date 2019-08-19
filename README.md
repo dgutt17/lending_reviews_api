@@ -16,13 +16,16 @@ Initially, I tried to find API endpoints to make http requests to receive json f
             3. If the part of url after https://www.lendingtree.com/reviews/ is incorrect, you will recieve an error message with a status of 404
     
 ## Example Request<br />
-```{
+```
+{
 	"url": "https://www.lendingtree.com/reviews/personal/first-midwest-bank/52903183"
-}```
+}
+```
 
 ## Example Response 1<br />
 
-```{
+```
+{
     reviews: [
         {
             "total_rating": "5",
@@ -32,10 +35,12 @@ Initially, I tried to find API endpoints to make http requests to receive json f
             "review_date": "Reviewed in August 2019"
         }
     ]
-}```
+}
+```
 
 ## Example Response 2<br />
-```{
+```
+{
     "reviews": [
         {
             "title": "awesome",
@@ -47,7 +52,8 @@ Initially, I tried to find API endpoints to make http requests to receive json f
             }
         },
     ]
-}```
+}
+```
 
 ## API Tech Stack<br />
 1. Ruby 2.5.1<br />
