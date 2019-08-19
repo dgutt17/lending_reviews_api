@@ -1,28 +1,28 @@
 # README
 
 ## Lending Tree Review Service <br />
-This service takes a url in the body of an http request and returns a response with a json object that contains an array of all the reviews associated with that url. If the url does not exist in the database, the data is received with a webscrapper and then cached in the PostgreSQL database. If the url is called again, the data is received from the database.
+This service takes a url from a request and responds with an array of all the reviews associated with that url from lendingtree.com. If the url does not exist in the database, the data is collected with a webscrapper and then cached in the PostgreSQL database. If the url is called again, the data is retrieved from the database.
 
 ## Possible Second Idea for Webservice to Improve Speed<br />
-Initially, I tried to find API endpoints to make http requests to receive json for all the reviews for a given url. However, LendingTree does not have a publicly available API. So I started to search the chrome dev tools for possible API endpoints with data. There is actually an API endpoint that you get json for specific Lenders: https://www.lendingtree.com/content/mu-plugins/lt-review-api/review-api-proxy.php?RequestType=&productType=&brandId=27085&requestmode=reviews,stats,ratingconfig,propertyconfig&page=0&sortby=reviewsubmitted&sortorder=desc&pagesize=10&AuthorLocation=All&_t=1566185572884. So perhaps in the second iteration of this project I would use this API endpoint instead of webscrapping. The one issue with this endpoint is that you need the brandId, which is not readily available. So you could make http requests to this endpoint until you store all the brandIds in your DB. Then match lenders to their brandId and make a request to this endpoint.
+Initially, I tried to find API endpoints to collect all the reviews for a given url. However, LendingTree does not have a publicly available API. So I started to search the chrome dev tools for publicly available API endpoints. There is actually an API endpoint that you can get json for specific Lenders: https://www.lendingtree.com/content/mu-plugins/lt-review-api/review-api-proxy.php?RequestType=&productType=&brandId=27085&requestmode=reviews,stats,ratingconfig,propertyconfig&page=0&sortby=reviewsubmitted&sortorder=desc&pagesize=10&AuthorLocation=All&_t=1566185572884. Perhaps in the second iteration of this project, I would use this API endpoint instead of webscrapping. The one issue with this endpoint is that you need the brandId, which is difficult to find.
 
 ## The API Specifications<br />
     1. Request Type: POST
     2. Route: ROOT/lending_tree/fetch_reviews
     3. Parameters in the body of the request
         a. url
-            1. string
+            1. DATA_TYPE: string
             2. REQUIREMENT: the url must start with https://www.lendingtree.com/reviews/ otherwise you will get an error message with a status of 400
             3. If the part of url after https://www.lendingtree.com/reviews/ is incorrect, you will recieve an error message with a status of 404
     
-## Example Request<br />
+## Example Request Body<br />
 ```
 {
 	"url": "https://www.lendingtree.com/reviews/personal/first-midwest-bank/52903183"
 }
 ```
 
-## Example Response 1<br />
+## Example Response Body 1<br />
 
 ```
 {
@@ -38,7 +38,7 @@ Initially, I tried to find API endpoints to make http requests to receive json f
 }
 ```
 
-## Example Response 2<br />
+## Example Response Body 2<br />
 ```
 {
     "reviews": [
