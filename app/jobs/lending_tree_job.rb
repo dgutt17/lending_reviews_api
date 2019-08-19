@@ -10,10 +10,7 @@ class LendingTreeJob
                 new_review = Review.new(title: review["title"], content: review["content"], total_rating: review["star_rating"])
                 new_review.author = new_author
                 new_review.business_url = b_url
-                # new_review.title = review["title"]
-                # new_review.content = review["content"]
                 new_review.review_date = review["review_date"].split("in")[1].strip if review["review_date"].present?
-                # new_review.total_rating = review["star_rating"]
 
                 new_review.save!
             end

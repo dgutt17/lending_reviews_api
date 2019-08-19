@@ -2,7 +2,8 @@ class Review < ApplicationRecord
     belongs_to :business_url
     belongs_to :author
 
-    validates :title, presence: true
+    # I commented out this validation because some Reviews don't have titles
+    # validates :title, presence: true
     validates :content, presence: true
 
     def as_json(options={})

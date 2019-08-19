@@ -2,7 +2,8 @@ require 'nokogiri'
 require 'open-uri'
 
 class LendingTreeParser
-    attr_accessor :url, :reviews, :doc, :lender_nav_present
+    attr_accessor :url, :reviews, :doc, :lender_nav_present, 
+                  :stored_reviews, :query_string, :no_doc_count
 
     def initialize(url)
         @url = url
