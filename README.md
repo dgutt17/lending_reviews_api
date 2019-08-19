@@ -8,7 +8,7 @@
 
 ## The API Specifications<br />
     1. Request Type: POST
-    2. URI: http://localhost:3000/lending_tree/fetch_reviews
+    2. Route: ROOT/lending_tree/fetch_reviews
     3. Parameters in the body of the request
         a. url
             1. string
