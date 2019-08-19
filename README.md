@@ -16,38 +16,38 @@ Initially, I tried to find API endpoints to make http requests to receive json f
             3. If the part of url after https://www.lendingtree.com/reviews/ is incorrect, you will recieve an error message with a status of 404
     
 ## Example Request<br />
-{<br /
+```{
 	"url": "https://www.lendingtree.com/reviews/personal/first-midwest-bank/52903183"
-<br />}
+}```
 
 ## Example Response 1<br />
 
-{<br />
-    reviews: [<br/>
-        {<br />
-            "total_rating": "5",<br />
-            "title": "Best",<br />
+```{
+    reviews: [
+        {
+            "total_rating": "5",
+            "title": "Best",
             "content": "Best decision i could have made. Kind agent very precise and friendly help. She gave us plenty of options that worked best for our family..",<br />
-            "author": "Oneal from DECATUR, IL ",<br />
-            "review_date": "Reviewed in August 2019"<br />
-        }<br />
-    ]<br />
-}
+            "author": "Oneal from DECATUR, IL ",
+            "review_date": "Reviewed in August 2019"
+        }
+    ]
+}```
 
 ## Example Response 2<br />
-{<br />
-    "reviews": [<br />
-        {<br />
-            "title": "awesome",<br />
-            "content": "I have had great experience with Mandy and She answered all my questions with rapid response. Great customer service and helped me through out the Loan process with speed and accuracy. thank U again Mandy!!",<br />
-            "total_rating": 5,<br />
-            "review_date": "March 2016",<br />
-            "author": {<br />
-                "name": "Patrick"<br />
-            }<br />
-        },<br />
-    ]<br />
-}
+```{
+    "reviews": [
+        {
+            "title": "awesome",
+            "content": "I have had great experience with Mandy and She answered all my questions with rapid response. Great customer service and helped me through out the Loan process with speed and accuracy. thank U again Mandy!!",
+            "total_rating": 5,
+            "review_date": "March 2016",
+            "author": {
+                "name": "Patrick"
+            }
+        },
+    ]
+}```
 
 ## API Tech Stack<br />
 1. Ruby 2.5.1<br />
