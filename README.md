@@ -13,7 +13,7 @@ Initially, I tried to find API endpoints to collect all the reviews for a given 
         a. url
             1. DATA_TYPE: string
             2. REQUIREMENT: the url must start with https://www.lendingtree.com/reviews/ otherwise you will get an error message with a status of 400
-            3. If the part of url after https://www.lendingtree.com/reviews/ is incorrect, you will recieve an error message with a status of 404
+            3. If the part of url after https://www.lendingtree.com/reviews/ is incorrect, you will receive an error message with a status of 404
     
 ## Example Request Body<br />
 ```
