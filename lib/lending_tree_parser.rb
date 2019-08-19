@@ -52,7 +52,7 @@ class LendingTreeParser
     def html_doc_iterator(reviews)
         reviews.each do |elem|
             hash = {}
-            hash["star_rating"] = elem.css(".numRec")[0].content[1]
+            hash["total_rating"] = elem.css(".numRec")[0].content[1]
             hash["title"] = elem.css(".reviewTitle")[0].content
             hash["content"] = elem.css(".reviewText")[0].content
             hash["author"] = elem.css(".consumerName")[0].content
