@@ -6,11 +6,11 @@ class LendingTreeJob
         ActiveRecord::Base.transaction do
             b_url = BusinessUrl.find_or_create_by(url: url)
             reviews.each do |review|
-                new_author = Author.find_or_create(review["author"])
-                new_review = Review.new(title: review["title"], content: review["content"], total_rating: review["total_rating"])
+                new_author = Author.find_or_create(review)
+                new_review = Review.new(title: review["title"].strip, content: review["text"].strip, total_rating: review["primaryRating"]["value"])
                 new_review.author = new_author
                 new_review.business_url = b_url
-                new_review.review_date = review["review_date"].split("in")[1].strip if review["review_date"].present?
+                new_review.review_date = Chronic.parse(review["submissionDateTime"]).beginning_of_day
 
                 new_review.save!
             end

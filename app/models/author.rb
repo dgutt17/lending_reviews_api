@@ -3,11 +3,10 @@ class Author < ApplicationRecord
 
     validates :name, presence: true
     
-    def self.find_or_create(author)
-        author_arr = author.split("from")
-        db_author = Author.find_by_name(author_arr[0].strip)
+    def self.find_or_create(review)
+        db_author = Author.find_by_name(review["authorName"])
         if !db_author
-            db_author = Author.new(name: author_arr[0].strip, location: author_arr[1].strip)
+            db_author = Author.new(name: review["authorName"].strip, location: review["userLocation"].strip)
 
             db_author.save!
         end

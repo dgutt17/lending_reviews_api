@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(version: 2019_08_17_210800) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "business_url_id"
-    t.string "review_date"
+    t.date "review_date"
     t.integer "author_id"
     t.index ["author_id"], name: "index_reviews_on_author_id"
     t.index ["business_url_id"], name: "index_reviews_on_business_url_id"
