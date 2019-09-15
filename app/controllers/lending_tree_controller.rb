@@ -8,7 +8,7 @@ class LendingTreeController < ApplicationController
             reviews = @business_url.reviews
         else
             lending_tree_parser = LendingTreeParser.new(params[:url])
-            reviews = lending_tree_parser.page_iterator
+            reviews = lending_tree_parser.retrieve_reviews
             LendingTreeJob.perform_async(reviews, params[:url])
         end
 

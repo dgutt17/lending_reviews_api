@@ -2,62 +2,45 @@ require 'nokogiri'
 require 'open-uri'
 
 class LendingTreeParser
-    attr_accessor :url, :reviews, :doc, :lender_nav_present, 
-                  :stored_reviews, :query_string, :no_doc_count
+    include HTTParty
+
+    attr_accessor :url, :doc, :reviews, :brand_id, :total_reviews, :page_size
+                  :response
 
     def initialize(url)
         @url = url
         @stored_reviews = []
-        @query_string = "?sort=cmV2aWV3c3VibWl0dGVkX2Rlc2M=&pid="
-        @no_doc_count = 0
+        @api_end_point = "https://www.lendingtree.com/content/mu-plugins/lt-review-api/review-api-proxy.php?brandId="
+        @page_size = "&pagesize="
     end
 
-    def page_iterator
-        page_num = 1
-        while true do
-            puts "url: #{@url}#{@query_string}#{page_num}"
-            doc = fetching_html_doc("#{@url}#{@query_string}#{page_num}")
-            break if !lender_nav_present?(doc) && @no_doc_count >= 10
-            reviews = get_reviews(doc)
-            html_doc_iterator(reviews)
+    def retrieve_reviews
+        fetching_html_doc
+        fetch_brand_id
+        fetch_total_reviews
+        fetch_reviews
 
-            page_num += 1
-        end
-
-        return @stored_reviews
+        reviews = JSON.parse(@response)
+        reviews = reviews["result"]["reviews"]
+        return reviews
     end
 
     private 
 
-    def fetching_html_doc(url)
-        doc = Nokogiri::HTML(open(url))
-
-        doc
+    def fetching_html_doc
+        @doc = Nokogiri::HTML(open(@url))
     end
 
-    def lender_nav_present?(doc)
-        lender_nav_present = doc.css(".lenderNav.pagination").present?
-        @no_doc_count += 1 if !lender_nav_present
-
-        lender_nav_present
+    def fetch_brand_id
+       @brand_id = @doc.css(".write-review").first.attributes["data-lenderreviewid"].value
     end
 
-    def get_reviews(doc)
-        lender_reviews = doc.css(".lenderReviews")
-        main_reviews = lender_reviews.css(".mainReviews")
-
-        main_reviews
+    def fetch_total_reviews
+        @total_reviews = @doc.css(".scrolltoreview").first.children.first.text.to_i
     end
 
-    def html_doc_iterator(reviews)
-        reviews.each do |elem|
-            hash = {}
-            hash["total_rating"] = elem.css(".numRec")[0].content[1]
-            hash["title"] = elem.css(".reviewTitle")[0].content
-            hash["content"] = elem.css(".reviewText")[0].content
-            hash["author"] = elem.css(".consumerName")[0].content
-            hash["review_date"] = elem.css(".consumerReviewDate")[0].content
-            @stored_reviews << hash
-        end
+    def fetch_reviews
+        url = @api_end_point + @brand_id + @page_size + @total_reviews.to_s
+        @response = HTTParty.get(url)
     end
 end
