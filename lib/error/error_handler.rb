@@ -9,6 +9,10 @@ module Error
                 rescue_from OpenURI::HTTPError do |e|
                     respond(:http_error, e.message)
                 end
+
+                rescue_from Errno::ENOENT do |e|
+                    respond(:enoent, e.message)
+                end
             end
         end
 
