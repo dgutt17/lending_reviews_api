@@ -18,7 +18,7 @@ module Error
 
         private
          def respond(error_type, error_message)
-            if error_type == :http_error
+            if error_type == :http_error || error_type == :enoent
                 render json: {error_message: error_message}, status: 404
             else
                 render json: {error_message: error_message}, status: 500
