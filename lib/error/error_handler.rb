@@ -7,14 +7,14 @@ module Error
                 end
 
                 rescue_from OpenURI::HTTPError do |e|
-                    respond(:enoent, e.message)
+                    respond(:http_error, e.message)
                 end
             end
         end
 
         private
          def respond(error_type, error_message)
-            if error_type == :enoent || error_type == :no_record
+            if error_type == :http_error
                 render json: {error_message: error_message}, status: 404
             else
                 render json: {error_message: error_message}, status: 500
