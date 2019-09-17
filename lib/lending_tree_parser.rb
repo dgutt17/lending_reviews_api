@@ -22,6 +22,7 @@ class LendingTreeParser
 
         reviews = JSON.parse(@response)
         reviews = reviews["result"]["reviews"]
+        binding.pry
         return reviews
     end
 
