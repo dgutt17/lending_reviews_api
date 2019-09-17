@@ -2,16 +2,12 @@ module Error
     module ErrorHandler
         def self.included(clazz)
             clazz.class_eval do 
-                rescue_from Errno::ENOENT do |e|
-                    respond(:enoent, e.message)
-                end
-
-                rescue_from ActiveRecord::RecordNotFound do |e|
-                    respond(:no_record, e.message)
-                end
-
                 rescue_from StandardError do |e|
                     respond(:standard, e.message)
+                end
+
+                rescue_from OpenURI::HTTPError do |e|
+                    respond(:enoent, e.message)
                 end
             end
         end
